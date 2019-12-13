@@ -64,7 +64,7 @@ if (isset($_POST['modifier'])){
 	$registre=new registre($_POST['cin'],$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['pass']);
 	$registreC->modifierregistre($registre,$_POST['cin_ini']);
 	echo $_POST['cin'];
-	header('Location: chart.php');
+	header('Location: afficherregistre.php');
 }
 ?>
 </body>

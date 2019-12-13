@@ -13,7 +13,7 @@ var_dump($employe1);
 //Partie3
 $registre1C=new RegistreC();
 $registre1C->ajouterRegistre($registre1);
-header('Location: afficherregistre.php');
+header('Location: gallery.php');
 	
 }else{
 	echo "vérifier les champs";

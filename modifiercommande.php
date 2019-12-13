@@ -48,9 +48,9 @@ if (isset($_GET['num'])){
 }
 if (isset($_POST['modifier'])){
 	$commande=new Commande($_POST['num'],$_POST['categorie'],$_POST['type'],$_POST['sexe']);
-	$commandeC->modifiercommande($commande,$_POST['num']);
+	$commandeC->modifiercommande($commande,$_POST['num_ini']);
 	echo $_POST['num'];
-	header('Location: commande.php');
+	header('Location: affichercommande.php');
 }
 ?>
 </body>

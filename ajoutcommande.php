@@ -13,7 +13,7 @@ var_dump($employe1);
 //Partie3
 $commande1C=new CommandeC();
 $commande1C->ajouterCommande($commande1);
-header('Location: affichercommande.php');
+header('Location: ajout.php');
 	
 }else{
 	echo "vérifier les champs";

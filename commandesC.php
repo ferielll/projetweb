@@ -33,6 +33,30 @@ function afficherCommande ($commande){
         }
 		
 	}
+	function ajouterCommandes($commande){
+		$sql="insert into commandes (idP,type,sexe,prix,qte) values (:idP,:type,:sexe,:prix,:qte)";
+		$db = config::getConnexion();
+		try{
+        $req=$db->prepare($sql);
+        $idP=$commande->getIdP();
+        $type=$commande->gettype();
+        $sexe=$commande->getsexe();
+        $prix=$commande->getprix();
+        $qte=$commande->getqte();
+		$req->bindValue(':idP',$idP);
+		$req->bindValue(':type',$type);
+		$req->bindValue(':sexe',$sexe);
+		$req->bindValue(':prix',$prix);
+		$req->bindValue(':qte',$qte);
+		
+            $req->execute();
+           
+        }
+        catch (Exception $e){
+            echo 'Erreur: '.$e->getMessage();
+        }
+		
+	}
 	
 	function affichercommandes(){
 		//$sql="SElECT * From employe e inner join formationphp.employe a on e.num= a.num";
@@ -60,7 +84,7 @@ function afficherCommande ($commande){
         }
 	}
 	function modifiercommande($commande,$num){
-		$sql="UPDATE commande SET num=:num, categorie=:categorie,type=:type,sexe=:sexe  where num=:num";
+		$sql="UPDATE commande SET num=:num, categorie=:categorie,type=:type,sexe=:sexe where num=:num";
 		
 		$db = config::getConnexion();
 		//$db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
@@ -87,8 +111,8 @@ $datas = array( ':num'=>$num, ':categorie'=>$categorie,':type'=>$type,':sexe'=>$
         }
 		
 	}
-	function recuperercommande($num){
-		$sql="SELECT * from commande where num=$num";
+	function recuperercommande($idP){
+		$sql="SELECT * from produit where idP=$idP";
 		$db = config::getConnexion();
 		try{
 		$liste=$db->query($sql);

@@ -53,7 +53,19 @@ function afficherProduit ($produit){
 	
 	function afficherproduits(){
 		//$sql="SElECT * From employe e inner join formationphp.employe a on e.idC= a.idC";
-		$sql="SElECT * From produit";
+		$sql="SELECT * FROM produit ";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }	
+	}
+	function afficherpaniers(){
+		//$sql="SElECT * From employe e inner join formationphp.employe a on e.idC= a.idC";
+		$sql="SELECT * FROM produit where panier=1 ";
 		$db = config::getConnexion();
 		try{
 		$liste=$db->query($sql);
@@ -64,7 +76,20 @@ function afficherProduit ($produit){
         }	
 	}
 	function supprimerproduit($idP){
-		$sql="DELETE FROM produit where idP= :idP";
+		$sql="UPDATE produit SET panier=1 where idP=:idP";
+		$db = config::getConnexion();
+        $req=$db->prepare($sql);
+		$req->bindValue(':idP',$idP);
+		try{
+            $req->execute();
+           // header('Location: index.php');
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
+	function supprimerpanier($idP){
+		$sql="UPDATE produit SET panier=0 where idP=:idP";
 		$db = config::getConnexion();
         $req=$db->prepare($sql);
 		$req->bindValue(':idP',$idP);
